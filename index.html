@@ -1,1 +1,12 @@
-<h1>hello!!! grist hi rajasekar</h1>
+<script src="https://docs.getgrist.com/grist-plugin-api.js"></script>
+<img id="image" src="" />
+<div id="title"> </div>
+<script>
+  grist.ready({requiredAccess: 'read table'});
+  grist.onRecord( function (record){
+    document.getElementById('image').src = record.link;
+    document.getElementById('title').innerText = record.title;
+  }
+  );
+  
+</script>
