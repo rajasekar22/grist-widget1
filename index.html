@@ -2,10 +2,16 @@
 <img id="image" src="" />
 <div id="title"> </div>
 <script>
-  grist.ready({requiredAccess: 'read table'});
-  grist.onRecord( function (record){
-    document.getElementById('image').src = record.link;
-    document.getElementById('title').innerText = record.title;
+  grist.ready({columns: ['Link', 'Title'], requiredAccess: 'read table'});
+  grist.onRecord( function (record, mappings){
+    mapped = grist.mapColumnNames(record);
+    if (mapped){
+      document.getElementById('image').src = mapped.Link;
+      document.getElementById('title').innerText = mapped.Title;
+      console.log(`mappings with ${mappings.Link} and ${mappings.Title} columns.`);
+    } else {
+      console.log('please map all columns');      
+    }
   }
   );
   
